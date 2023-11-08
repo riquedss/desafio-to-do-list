@@ -1,0 +1,8 @@
+= semantic_form_for [:admin, @task], html: { enctype: "multipart/form-data" } do |f|
+  = f.inputs "Tarefa", multipart: true do
+    = f.input :name
+    = f.input :description
+    = f.input :to_do_list, collection: ToDoList.all
+    = f.input :date
+
+  = f.actions

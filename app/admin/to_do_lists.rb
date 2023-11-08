@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 ActiveAdmin.register ToDoList do
   permit_params :title, :description
 
