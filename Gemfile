@@ -52,8 +52,6 @@ gem "sassc-rails"
 gem 'activeadmin', "~> 2.14.0"
 gem 'arctic_admin'
 gem 'ransack', "~> 3.2.1"
-gem 'draper'
-gem 'pundit'
 
 # Autenticação
 gem 'devise'
