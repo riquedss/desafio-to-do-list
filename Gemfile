@@ -48,16 +48,20 @@ gem "sassc-rails"
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
-
+# Activeadmin
 gem 'activeadmin', "~> 2.14.0"
 gem 'arctic_admin'
 gem 'ransack', "~> 3.2.1"
-
-# Plus integrations with:
-gem 'devise'
-gem 'cancancan'
 gem 'draper'
 gem 'pundit'
+
+# Autenticação
+gem 'devise'
+
+# Permissões
+gem 'cancancan'
+
+gem 'slim-rails'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
