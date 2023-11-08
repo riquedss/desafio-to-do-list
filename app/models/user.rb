@@ -6,5 +6,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable,
          :rememberable, :validatable, :trackable
 
+  enum role: %i[normal admin]
+
   has_many :to_do_lists, dependent: :destroy
 end
