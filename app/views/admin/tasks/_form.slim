@@ -2,7 +2,7 @@
   = f.inputs "Tarefa", multipart: true do
     = f.input :name
     = f.input :description
-    = f.input :to_do_list, collection: ToDoList.all
+    = f.input :to_do_list, collection: current_user.to_do_lists
     = f.input :date
 
   = f.actions
