@@ -1,8 +1,13 @@
 Rails.application.routes.draw do
-  devise_for :users, ActiveAdmin::Devise.config
+  devise_config = ActiveAdmin::Devise.config
+  devise_config[:path] = :auth
+  devise_for :users, devise_config
   ActiveAdmin.routes(self)
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
   root to: 'admin/dashboard#index'
+
+  namespace :auth do
+    get '/signup', to: 'signup#new'
+    post '/signup', to: 'signup#create'
+  end
 end
