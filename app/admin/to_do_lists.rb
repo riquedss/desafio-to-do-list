@@ -5,11 +5,15 @@ ActiveAdmin.register ToDoList do
 
   menu label: 'Lista de Tarefas'
 
+  filter :title, label: 'Título'
+
   actions :all, except: [:show]
 
   index do
     column :title
     column :description
+    column :created_at
+    column :updated_at
     actions
   end
 
