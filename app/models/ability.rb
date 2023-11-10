@@ -6,12 +6,17 @@ class Ability
   def initialize(user)
     user ||= Usuario.new
 
-    can :manage, User if user.admin?
-
     can :read, ActiveAdmin::Page, name: 'Dashboard'
     can :manage, ToDoList, user_id: user.id
     can :manage, Tag, user_id: user.id
+    can :manage, User, id: user.id
     can :manage, Task, to_do_list_id: user.to_do_list_ids
     can :create, Task
+
+    if user.admin?
+      can :manage, User
+    else
+      cannot %i[new create index delete], User
+    end
   end
 end
