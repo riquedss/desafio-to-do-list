@@ -5,6 +5,10 @@ ActiveAdmin.register Task do
 
   menu label: 'Tarefas'
 
+  scope :para_fazer
+  scope :fazendo
+  scope :finalizada
+
   filter :name, label: 'Nome'
   filter :status, as: :select, collection: proc { Task.statuses }
   filter :to_do_list, label: 'Lista de tarefas'
@@ -20,8 +24,17 @@ ActiveAdmin.register Task do
       status_tag(resource.status)
     end
     column :date
-    actions
+
+    actions do |resource|
+      # byebug
+      # item 'Iniciar', "#{atualiza_status_admin_task_path(resource)}?status=1", class: 'member_link'
+      # item 'Finalizada', "#{atualiza_status_admin_task_path(resource)}?status=2", class: 'member_link'
+    end
   end
 
   form partial: 'form'
+
+  member_action :atualiza_status, method: :post do
+    byebug
+  end
 end

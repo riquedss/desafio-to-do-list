@@ -7,4 +7,8 @@ class Task < ApplicationRecord
   enum status: %i[para_fazer fazendo finalizada]
 
   validates :name, presence: true
+
+  scope :para_fazer, -> { where(status: 0) }
+  scope :fazendo, -> { where(status: 1) }
+  scope :finalizada, -> { where(status: 2) }
 end
