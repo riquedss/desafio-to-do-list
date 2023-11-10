@@ -1,0 +1,6 @@
+-# frozen_string_literal: true
+= semantic_form_for [:admin, @user], :url => atualizar_senha_admin_user_path(@user) do |f|
+  = f.inputs "Detalhes" do
+    = f.input :password, :label => "Senha"
+    = f.input :password_confirmation, :label => "Confirme a senha"
+  = f.actions

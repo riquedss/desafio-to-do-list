@@ -1,33 +1,65 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  permit_params :email, :role, :password, :password_confirmation
+  permit_params :name, :last_name, :birthday, :email, :role, :password, :password_confirmation
 
-  menu label: 'Usuário'
-
-  index do
-    selectable_column
-    id_column
-    column :email
-    column :role
-    column :current_sign_in_at
-    column :sign_in_count
-    column :created_at
-    actions
-  end
+  menu if: -> { can?(:index, User) }, label: 'Usuário'
 
   filter :email
   filter :current_sign_in_at
   filter :sign_in_count
   filter :created_at
 
-  form do |f|
-    f.inputs do
-      f.input :email
-      f.input :password
-      f.input :password_confirmation
-      f.input :role, collection: User.roles.keys
+  index do
+    selectable_column
+    id_column
+    column :name
+    column :last_name
+    column :email
+    column :role
+    column :current_sign_in_at
+    column :sign_in_count
+    column :created_at
+
+    actions do |usuario|
+      link_to 'Alterar Senha', editar_senha_admin_user_path(usuario), class: 'member_link'
     end
-    f.actions
+  end
+
+  show do
+    panel('Detalhes do Usuário') do
+      attributes_table_for resource do
+        row :name
+        row :last_name
+        row :email
+        row :role
+        row :current_sign_in_at
+        row :created_at
+        row :updated_at
+      end
+    end
+  end
+
+  form partial: 'form'
+
+  action_item :editar_senha, only: :show do
+    link_to 'Editar senha', editar_senha_admin_user_path(current_user)
+  end
+
+  member_action 'editar_senha' do
+    @user = User.find(params[:id])
+    authorize! :editar_senha, @user
+    render action: 'editar_senha'
+  end
+
+  member_action 'atualizar_senha', :method => :patch do
+    @user = User.find(params[:id])
+    authorize! :editar_senha, @user
+    if @user.update(params.require(:user).permit(:password, :password_confirmation))
+      flash[:notice] = 'Senha alterada com sucesso'
+      redirect_to admin_user_path(@user)
+    else
+      render action: 'editar_senha'
+    end
   end
 end
