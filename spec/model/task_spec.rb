@@ -8,4 +8,8 @@ RSpec.describe Task, type: :model do
     it { is_expected.to have_db_column(:tag_id).of_type(:integer) }
     it { is_expected.to have_db_column(:status).of_type(:integer) }
   end
+
+  describe 'Validações do modelo' do
+    it { is_expected.to validate_presence_of(:name) }
+  end
 end

@@ -6,4 +6,8 @@ RSpec.describe Tag, type: :model do
     it { is_expected.to have_db_column(:ativo).of_type(:boolean) }
     it { is_expected.to have_db_column(:user_id).of_type(:integer) }
   end
+
+  describe 'Validações do modelo' do
+    it { is_expected.to validate_presence_of(:name) }
+  end
 end
