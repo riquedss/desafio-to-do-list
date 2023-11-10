@@ -10,6 +10,7 @@ class Ability
 
     can :read, ActiveAdmin::Page, name: 'Dashboard'
     can :manage, ToDoList, user_id: user.id
+    can :manage, Tag, user_id: user.id
     can :manage, Task, to_do_list_id: user.to_do_list_ids
     can :create, Task
   end
