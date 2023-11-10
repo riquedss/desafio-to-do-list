@@ -3,6 +3,7 @@
     = f.input :name
     = f.input :description
     = f.input :to_do_list, collection: current_user.to_do_lists
+    = f.input :tag, collection:  current_user.tags 
     = f.input :date
 
   = f.actions
