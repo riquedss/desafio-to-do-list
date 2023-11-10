@@ -14,7 +14,9 @@ ActiveAdmin.register ToDoList do
     column :description
     column :created_at
     column :updated_at
-    actions
+    actions do |resource|
+      item 'Tarefas', "#{admin_tasks_path}?q%5Bto_do_list_id_eq%5D=#{resource.id}&commit=Filter", class: 'member_link'
+    end
   end
 
   before_save do |to_do_list|
