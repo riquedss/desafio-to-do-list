@@ -11,4 +11,5 @@ class Task < ApplicationRecord
   scope :para_fazer, -> { where(status: 0) }
   scope :fazendo, -> { where(status: 1) }
   scope :finalizada, -> { where(status: 2) }
+  scope :com_prazo, -> { where.not(date: nil) }
 end
