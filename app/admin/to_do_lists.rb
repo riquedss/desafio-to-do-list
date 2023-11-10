@@ -3,6 +3,8 @@
 ActiveAdmin.register ToDoList do
   permit_params :title, :description
 
+  menu label: 'Lista de Tarefas'
+
   actions :all, except: [:show]
 
   index do
@@ -10,8 +12,6 @@ ActiveAdmin.register ToDoList do
     column :description
     actions
   end
-
-  form partial: 'form'
 
   before_save do |to_do_list|
     to_do_list.user_id = current_user.id

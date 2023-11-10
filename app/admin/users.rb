@@ -3,6 +3,8 @@
 ActiveAdmin.register User do
   permit_params :email, :role, :password, :password_confirmation
 
+  menu label: 'Usuário'
+
   index do
     selectable_column
     id_column
