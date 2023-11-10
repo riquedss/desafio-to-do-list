@@ -1,0 +1,6 @@
+= semantic_form_for [:admin, @tag], html: { enctype: "multipart/form-data" } do |f|
+  = f.inputs "Tag", multipart: true do
+    = f.input :name
+    = f.input :ativo
+
+  = f.actions
