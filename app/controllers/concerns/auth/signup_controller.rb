@@ -13,9 +13,9 @@ module Auth
 
       if @user.save
         @user = User.new
-        render turbo_stream: turbo_stream.replace('turbo-frame', partial: 'success')
+        render turbo_stream: turbo_stream.append('turbo-frame', partial: 'sucesso')
       else
-        render turbo_stream: turbo_stream.replace('turbo-frame', partial: 'erro')
+        render turbo_stream: turbo_stream.append('turbo-frame', partial: 'erro')
       end
     end
 
