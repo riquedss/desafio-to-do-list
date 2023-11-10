@@ -8,6 +8,7 @@ ActiveAdmin.register Task do
   scope :para_fazer
   scope :fazendo
   scope :finalizada
+  scope :com_prazo
 
   filter :name, label: 'Nome'
   filter :status, as: :select, collection: proc { Task.statuses }
@@ -26,15 +27,25 @@ ActiveAdmin.register Task do
     column :date
 
     actions do |resource|
-      # byebug
-      # item 'Iniciar', "#{atualiza_status_admin_task_path(resource)}?status=1", class: 'member_link'
-      # item 'Finalizada', "#{atualiza_status_admin_task_path(resource)}?status=2", class: 'member_link'
+      item('Atualiza Status', atualiza_status_admin_task_path(resource), class: 'member_link')
     end
   end
 
   form partial: 'form'
 
-  member_action :atualiza_status, method: :post do
-    byebug
+  member_action :atualiza_status, method: :get do
+    @task = Task.find(params[:id])
+    render action: 'atualizar_status'
+  end
+
+  member_action 'atualizar_status', method: :patch do
+    @task = Task.find(params[:id])
+
+    if @task.update(status: params.require(:task).permit(:status)[:status].try(:to_i))
+      flash[:notice] = "Status alterado com sucesso para #{@task.status}"
+      redirect_to admin_tasks_path
+    else
+      render action: 'atualizar_status'
+    end
   end
 end

@@ -1,0 +1,10 @@
+= semantic_form_for [:admin, @task], url: atualizar_status_admin_task_path(@task) do |f|
+  = f.inputs "Detalhes" do
+    - if @task.finalizada?
+      = f.input :status, as: :select, collection: [@task.status], input_html: { disabled: true }
+    - else
+        - status = Task.statuses.to_hash
+        - status.delete("para_fazer")
+        = f.input :status, as: :select, collection: status, :include_blank => false
+
+  = f.actions
