@@ -9,4 +9,5 @@ class User < ApplicationRecord
   enum role: %i[normal admin]
 
   has_many :to_do_lists, dependent: :destroy
+  has_many :tags, dependent: :destroy
 end
