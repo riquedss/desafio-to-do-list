@@ -35,11 +35,14 @@ ActiveAdmin.register Task do
 
   member_action :atualiza_status, method: :get do
     @task = Task.find(params[:id])
+    authorize! :atualiza_status, @task
+
     render action: 'atualizar_status'
   end
 
   member_action 'atualizar_status', method: :patch do
     @task = Task.find(params[:id])
+    authorize! :atualizar_status, @task
 
     if @task.update(status: params.require(:task).permit(:status)[:status].try(:to_i))
       flash[:notice] = "Status alterado com sucesso para #{@task.status}"
