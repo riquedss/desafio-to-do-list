@@ -1,9 +1,15 @@
 # frozen_string_literal: true
 
 ActiveAdmin.register User do
-  permit_params :name, :last_name, :birthday, :email, :role, :password, :password_confirmation
+  permit_params do
+    params = %i[name last_name birthday email password password_confirmation]
 
-  menu if: -> { can?(:index, User) }, label: 'Usuário'
+    params << %i[role] if can?(:update_all_params, User)
+
+    params
+  end
+
+  menu if: -> { current_user.admin? }, label: 'Usuário'
 
   filter :email
   filter :current_sign_in_at
@@ -54,7 +60,7 @@ ActiveAdmin.register User do
 
   member_action 'atualizar_senha', :method => :patch do
     @user = User.find(params[:id])
-    authorize! :editar_senha, @user
+    authorize! :atualizar_senha, @user
     if @user.update(params.require(:user).permit(:password, :password_confirmation))
       flash[:notice] = 'Senha alterada com sucesso'
       redirect_to admin_user_path(@user)
