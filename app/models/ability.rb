@@ -11,7 +11,7 @@ class Ability
     can :manage, Tag, user_id: user.id
     can :manage, User, id: user.id
     can :manage, Task, to_do_list_id: user.to_do_list_ids
-    can :create, Task
+    can :new, Task
 
     if user.admin?
       can :manage, User
