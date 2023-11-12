@@ -9,14 +9,13 @@ class Ability
     can :read, ActiveAdmin::Page, name: 'Dashboard'
     can :manage, ToDoList, user_id: user.id
     can :manage, Tag, user_id: user.id
-    can :manage, User, id: user.id
     can :manage, Task, to_do_list_id: user.to_do_list_ids
-    can :create, Task
+    can :new, Task
 
     if user.admin?
       can :manage, User
     else
-      cannot %i[new create index delete], User
+      can %i[read edit update destroy editar_senha atualizar_senha], User, id: user.id
     end
   end
 end
