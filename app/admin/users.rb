@@ -58,7 +58,7 @@ ActiveAdmin.register User do
     render action: 'editar_senha'
   end
 
-  member_action 'atualizar_senha', :method => :patch do
+  member_action 'atualizar_senha', method: :patch do
     @user = User.find(params[:id])
     authorize! :atualizar_senha, @user
     if @user.update(params.require(:user).permit(:password, :password_confirmation))
