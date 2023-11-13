@@ -1,4 +1,5 @@
 = semantic_form_for [:admin, @task], html: { enctype: "multipart/form-data" } do |f|
+  - @task.date = DateTime.now
   = f.inputs "Tarefa", multipart: true do
     = f.input :name
     = f.input :description
