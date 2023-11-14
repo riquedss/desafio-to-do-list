@@ -1,12 +1,20 @@
-  <%= turbo_frame_tag 'turbo-frame' %>
-    <body class = "activeadmin logged_out new">
-      <div id="wrapper">
-        <div id="content_wrapper">
-          <%= render partial: 'base' %>
-        </div>
-      </div>
-    </body>
-  <%= yield %>
+<body class = "activeadmin logged_out new">
+  <div id="wrapper">
+    <div id="content_wrapper">
+       <%= turbo_frame_tag 'turbo-frame-erro' %>
+       <% yield %>
+      <%= render partial: 'base' %>
+    </div>
+  </div>
+  
+  <script>
+    function apagaFlash(){
+      var flash = document.querySelector('.flashes');
+
+      if (flash) flash.remove();  
+    }
+  </script>
+</body>
 
 
 
