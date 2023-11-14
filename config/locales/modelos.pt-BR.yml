@@ -1,0 +1,36 @@
+---
+pt-BR:
+  activerecord:
+    models:
+      tag:
+        one: Tag
+        other: Tags
+      task:
+        one: Tarefa
+        other: Tarefas
+      to_do_list:
+        one: Lista de Tarefa
+        other: Lista de Tarefas
+      user:
+        one: Usuário
+        other: usuários
+    attributes:
+      common: &comum
+        name: Nome
+        description: Descrição
+        status: Situação
+        created_at: Criado em
+        updated_at: Última atualização
+      to_do_list:
+        <<: *comum
+        title: Título
+      task:
+        <<: *comum
+        date: Prazo
+      tag:
+        <<: *comum
+
+
+
+
+
