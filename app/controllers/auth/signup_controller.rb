@@ -4,7 +4,6 @@ module Auth
   class SignupController < ApplicationController
     def new
       @user ||= User.new
-
       render :new
     end
 
@@ -13,9 +12,10 @@ module Auth
 
       if @user.save
         @user = User.new
-        render turbo_stream: turbo_stream.replace('turbo-frame', partial: 'sucesso')
+        redirect_to new_user_session_path
+        flash[:notice] = 'Usuário cadastrado com sucesso!'
       else
-        render turbo_stream: turbo_stream.append('turbo-frame', partial: 'erro')
+        render turbo_stream: turbo_stream.append('turbo-frame-erro', partial: 'erro_flash')
       end
     end
 
