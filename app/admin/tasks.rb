@@ -44,7 +44,7 @@ ActiveAdmin.register Task do
   member_action 'atualizar_status', method: :patch do
     @task = Task.find(params[:id])
     authorize! :atualizar_status, @task
-    # corrigir
+
     if @task.update(status: params.require(:task).permit(:status)[:status].try(:to_i))
       flash[:notice] = "Status alterado com sucesso para #{@task.status}"
       redirect_to admin_tasks_path
