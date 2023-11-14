@@ -1,0 +1,29 @@
+-# frozen_string_literal: true
+- tasks = Task.where(to_do_list_id: current_user.to_do_list_ids).order(:date)
+- if partial_value == "hoje"
+  - tasks = tasks&.select { |t| t if t.de_hoje? }
+  - span_alerta = 'Nenhuma tarefa com data de entrega para hoje'
+- else
+  - tasks = tasks&.select { |t| t if t.da_semana? && !t.de_hoje? }
+  - span_alerta = 'Nenhuma tarefa com data de entrega para a semana'
+
+- if tasks.blank?
+  .centralized
+    span= 'Nenhuma tarefa com data de entrega para hoje'
+- else
+  table
+    thead
+      tr
+        th= "Nome"
+        th= "Lista de Tarefas"
+        th= "Data"
+        th= "Hora"
+
+    tbody
+      -tasks.each do |task|
+        tr
+          td= task.name
+          td= task.to_do_list.title
+          td= task.date.strftime('%d-%m-%Y')
+          td= task.date.strftime('%H:%M')
+
