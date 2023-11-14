@@ -9,10 +9,11 @@ ActiveAdmin.register Task do
   scope :fazendo
   scope :finalizada
   scope :com_prazo
+  scope :atrasada
 
   filter :name, label: 'Nome'
   filter :status, as: :select, collection: proc { Task.statuses }
-  filter :to_do_list, label: 'Lista de tarefas'
+  filter :to_do_list, label: 'Lista de tarefas', collection: proc { ToDoList.select(:title, :id).where(user_id: current_user.id) }
   filter :tag
   filter :date, label: 'Prazo'
 

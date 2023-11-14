@@ -1,0 +1,52 @@
+div class: 'panel_wrapper' do
+  panel 'Tarefas' do
+    tasks_from_user_current = Task.where(to_do_list_id: current_user.to_do_list_ids)
+
+    columns do
+      column do
+        h5 'Para fazer'
+        h1 tasks_from_user_current.para_fazer.count
+        span link_to('Ver todas', "#{admin_tasks_path}?scope=para_fazer")
+      end
+
+      column do
+        h5 'Fazendo'
+        h1 tasks_from_user_current.where(to_do_list_id: current_user.to_do_list_ids).fazendo.count
+        span link_to('Ver todas', "#{admin_tasks_path}?scope=fazendo")
+      end
+
+      column do
+        h5 'Finalizadas'
+        h1 tasks_from_user_current.finalizada.count
+        span link_to('Ver todas', "#{admin_tasks_path}?scope=finalizadas")
+      end
+
+      column do
+        h5 'Com Prazo'
+        h1 tasks_from_user_current.com_prazo.count
+        span link_to('Ver todas', "#{admin_tasks_path}?scope=com_prazo")
+      end
+
+      column do
+        h5 'Atrasadas'
+        h1 tasks_from_user_current.atrasada.count
+        span link_to('Ver todas', "#{admin_tasks_path}?scope=atrasada")
+      end
+    end
+  end
+end
+
+div class: 'panel_wrapper' do
+  panel 'Prazo das tarefas' do
+    columns do
+      column do
+        h5 'Hoje'
+        render partial: 'table_tasks', locals: { partial_value: 'hoje' }
+      end
+      column do
+        h5 'semana'
+        render partial: 'table_tasks', locals: { partial_value: 'semana' }
+      end
+    end
+  end
+end

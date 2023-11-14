@@ -12,4 +12,13 @@ class Task < ApplicationRecord
   scope :fazendo, -> { where(status: 1) }
   scope :finalizada, -> { where(status: 2) }
   scope :com_prazo, -> { where.not(date: nil) }
+  scope :atrasada, -> { where('date < ? and status != 2 ', DateTime.now) }
+
+  def de_hoje?
+    date&.today?
+  end
+
+  def da_semana?
+    date && date >= DateTime.now.beginning_of_week && date <= DateTime.now.end_of_week
+  end
 end
