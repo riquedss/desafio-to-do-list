@@ -1,15 +1,14 @@
-
 <div id="active_admin_content">
   <div id="login">
     <h2>Cadastro To do List</h2>
     <%= form_with model: @user, url: '/auth/signup', html: { id: "session_new" } do |form| %>
-      <%= text_field_with_label(form, :name, 'Nome') %>
+      <%= text_field_with_label(form, :name, 'Nome*') %>
       <%= text_field_with_label(form, :last_name, 'Sobrenome') %>
-      <%= text_field_with_label(form, :email, 'E-mail') %>
+      <%= text_field_with_label(form, :email, 'E-mail*') %>
       <%= date_field_with_label(form, :birthday, 'Data de Nascimento') %>
-      <%= password_field_with_label(form, :password, 'Senha') %>
-      <%= password_field_with_label(form, :password_confirmation, 'Confirmação de senha') %>
-      <%= form.submit "Enviar" %>
+      <%= password_field_with_label(form, :password, 'Senha*') %>
+      <%= password_field_with_label(form, :password_confirmation, 'Confirmação da senha*') %>
+      <%= form.submit "Enviar", onclick: 'apagaFlash(this)'%>
     <%end%>
     <%= link_to t('active_admin.devise.links.login'), "/auth/login" %> <br>
   </div>
